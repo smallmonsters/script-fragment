@@ -1,0 +1,8 @@
+{
+  "name": "script-compilations",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:smallmonsters/script-compilations.git",
+  "author": "smallmosters <13657618017@163.com>",
+  "license": "MIT"
+}
