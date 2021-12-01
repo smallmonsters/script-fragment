@@ -15,13 +15,13 @@ function removeEmptyLines(string) {
  * @param {(err: Error | null, output: string))=>void} callback：
  * @return {*} 
  */
-const runGitCommand = (gitWorkTree, command, callback) => {
+exports.runGitCommand = (gitWorkTree, command, callback) => {
   const gitCommand = gitWorkTree
-    ? ['git', '--git-dir=' + path.join(gitWorkTree, '.git'), '--work-tree=' + gitWorkTree, command].join(' ')
+    ? ['git', `--git-dir=${path.join(gitWorkTree, '.git')}`, `--work-tree=${gitWorkTree}`, command].join(' ')
     : ['git', command].join(' ')
 
   if (callback) {
-    exec(gitCommand, function (err, stdout) {
+    exec(gitCommand, (err, stdout) => {
       if (err) {
         return callback(err, '')
       }
@@ -29,9 +29,9 @@ const runGitCommand = (gitWorkTree, command, callback) => {
     })
 
     return null
-  } else {
-    return removeEmptyLines(`${execSync(gitCommand)}`)
   }
+  return removeEmptyLines(`${execSync(gitCommand)}`)
+
 }
 
 console.log(runGitCommand('./', "log -1 --format=%cI"));
